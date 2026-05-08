@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunny the Vacuum Dog – A Delightful Children's Book</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sunny-yellow: #FFD93D;
+    --warm-orange: #FF6B35;
+    --sky-blue: #4ECDC4;
+    --grass-green: #6BCB77;
+    --soft-pink: #FF8FAB;
+    --cream: #FFF8EE;
+    --golden: #F4A836;
+    --deep-teal: #2D6A4F;
+    --text-dark: #2C2C2C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    background: linear-gradient(135deg, #FFF8EE 0%, #FFF0D4 40%, #E8F7FF 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(255,217,61,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(78,205,196,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .paw-trail {
+    position: absolute;
+    font-size: 28px;
+    opacity: 0.15;
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(10deg); }
+  }
+
+  .badge-new {
+    background: var(--warm-orange);
+    color: white;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 5px 18px;
+    border-radius: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(255,107,53,0.35);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+
+  .hero-title {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: clamp(52px, 9vw, 96px);
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-title .sunny { color: var(--warm-orange); }
+  .hero-title .the { color: var(--sky-blue); font-size: 0.55em; }
+  .hero-title .vacuum { color: var(--golden); }
+  .hero-title .dog { color: var(--grass-green); }
+
+  .hero-subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(17px, 2.8vw, 22px);
+    color: #666;
+    text-align: center;
+    margin-bottom: 36px;
+    font-weight: 600;
+    max-width: 520px;
+  }
+
+  .book-showcase {
+    position: relative;
+    margin-bottom: 44px;
+    z-index: 1;
+  }
+
+  .book-cover {
+    width: clamp(220px, 38vw, 320px);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 0 rgba(0,0,0,0.12),
+      0 20px 60px rgba(0,0,0,0.2),
+      0 40px 80px rgba(0,0,0,0.1);
+    transform: rotate(-2deg);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    display: block;
+  }
+
+  .book-cover:hover {
+    transform: rotate(0deg) scale(1.03);
+    box-shadow: 0 25px 80px rgba(0,0,0,0.25);
+  }
+
+  .sticker {
+    position: absolute;
+    background: var(--sunny-yellow);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    border: 3px dashed rgba(255,255,255,0.7);
+    animation: wiggle 3s ease-in-out infinite;
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-8deg) scale(1); }
+    50% { transform: rotate(-5deg) scale(1.04); }
+  }
+
+  .sticker-price {
+    top: -20px; right: -25px;
+    width: 100px; height: 100px;
+    font-size: 13px;
+    color: var(--text-dark);
+    line-height: 1.2;
+  }
+
+  .sticker-price .amount {
+    font-size: 24px;
+    color: var(--warm-orange);
+  }
+
+  .sticker-ship {
+    bottom: 10px; left: -30px;
+    width: 88px; height: 88px;
+    font-size: 11px;
+    color: var(--deep-teal);
+    background: var(--grass-green);
+    animation-delay: 1.5s;
+  }
+
+  .sticker-ship .ship-icon { font-size: 22px; margin-bottom: 2px; }
+
+  .hero-cta {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--warm-orange) 0%, #FF4D4D 100%);
+    color: white;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: clamp(20px, 3vw, 26px);
+    padding: 18px 54px;
+    border-radius: 60px;
+    text-decoration: none;
+    box-shadow: 0 8px 0 rgba(200,60,30,0.5), 0 15px 40px rgba(255,107,53,0.4);
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 11px 0 rgba(200,60,30,0.5), 0 20px 50px rgba(255,107,53,0.5);
+  }
+
+  .hero-cta:active {
+    transform: translateY(2px);
+    box-shadow: 0 4px 0 rgba(200,60,30,0.5);
+  }
+
+  .shipping-note {
+    margin-top: 14px;
+    font-size: 14px;
+    color: #888;
+    font-weight: 600;
+  }
+
+  /* ---- WAVY DIVIDER ---- */
+  .wave-divider {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    margin-top: -2px;
+  }
+
+  /* ---- STORY STRIP ---- */
+  .story-strip {
+    background: linear-gradient(135deg, var(--sky-blue) 0%, #36B5AC 100%);
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .story-strip h2 {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: clamp(30px, 5vw, 46px);
+    color: white;
+    margin-bottom: 20px;
+    text-shadow: 0 3px 0 rgba(0,0,0,0.1);
+  }
+
+  .story-strip p {
+    font-size: clamp(16px, 2.2vw, 20px);
+    color: rgba(255,255,255,0.93);
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-weight: 600;
+  }
+
+  /* ---- PAGES PREVIEW ---- */
+  .preview-section {
+    background: var(--cream);
+    padding: 70px 20px;
+    text-align: center;
+  }
+
+  .section-label {
+    display: inline-block;
+    background: var(--sunny-yellow);
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 20px;
+    border-radius: 30px;
+    margin-bottom: 14px;
+    color: var(--text-dark);
+  }
+
+  .preview-section h2 {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: clamp(28px, 4.5vw, 44px);
+    color: var(--text-dark);
+    margin-bottom: 50px;
+  }
+
+  .spread-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .spread-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .spread-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.15);
+  }
+
+  .spread-emoji {
+    font-size: 48px;
+    padding: 28px 20px 14px;
+    display: block;
+    background: linear-gradient(135deg, #FFF8EE, #FFF0D4);
+  }
+
+  .spread-text {
+    padding: 16px 20px 22px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.4;
+  }
+
+  /* ---- LEARNING SECTION ---- */
+  .learning-section {
+    background: linear-gradient(135deg, #FFF4E8 0%, #FFF8EE 100%);
+    padding: 70px 20px;
+    text-align: center;
+  }
+
+  .learning-section h2 {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: clamp(28px, 4.5vw, 44px);
+    color: var(--text-dark);
+    margin-bottom: 14px;
+  }
+
+  .learning-section > p {
+    font-size: 17px;
+    color: #666;
+    margin-bottom: 46px;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 22px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .lesson-card {
+    border-radius: 20px;
+    padding: 30px 20px;
+    font-weight: 700;
+    transition: transform 0.3s ease;
+  }
+
+  .lesson-card:hover { transform: translateY(-5px); }
+
+  .lesson-card .lesson-icon { font-size: 44px; margin-bottom: 14px; display: block; }
+  .lesson-card h3 { font-family: 'Baloo 2', cursive; font-size: 19px; font-weight: 800; margin-bottom: 8px; }
+  .lesson-card p { font-size: 14px; line-height: 1.5; opacity: 0.85; }
+
+  .lc-yellow { background: var(--sunny-yellow); color: var(--text-dark); }
+  .lc-green { background: var(--grass-green); color: white; }
+  .lc-pink { background: var(--soft-pink); color: white; }
+  .lc-teal { background: var(--sky-blue); color: white; }
+
+  /* ---- FOOD LIST ---- */
+  .food-section {
+    background: linear-gradient(135deg, #FF6B35 0%, #FF4D4D 100%);
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .food-section h2 {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: clamp(26px, 4vw, 40px);
+    color: white;
+    margin-bottom: 12px;
+    text-shadow: 0 3px 0 rgba(0,0,0,0.15);
+  }
+
+  .food-section p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 32px;
+    font-weight: 600;
+  }
+
+  .food-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .food-tag {
+    background: rgba(255,255,255,0.22);
+    border: 2px solid rgba(255,255,255,0.5);
+    color: white;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    backdrop-filter: blur(5px);
+  }
+
+  /* ---- AUTHOR ---- */
+  .author-section {
+    background: var(--cream);
+    padding: 70px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .author-avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sunny-yellow), var(--warm-orange));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 25px rgba(255,107,53,0.3);
+  }
+
+  .author-section h2 {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+  }
+
+  .author-role {
+    font-size: 14px;
+    color: var(--warm-orange);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .author-bio {
+    max-width: 620px;
+    font-size: 17px;
+    line-height: 1.75;
+    color: #555;
+    font-weight: 600;
+  }
+
+  /* ---- CTA FOOTER ---- */
+  .cta-section {
+    background: linear-gradient(135deg, #FFF3E0 0%, #FFF8EE 50%, #E8F7FF 100%);
+    padding: 80px 20px 90px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(255,217,61,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(107,203,119,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .cta-section h2 {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: clamp(30px, 5vw, 52px);
+    color: var(--text-dark);
+    margin-bottom: 10px;
+  }
+
+  .cta-section .highlight { color: var(--warm-orange); }
+
+  .cta-section p {
+    font-size: 17px;
+    color: #666;
+    margin-bottom: 40px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 600;
+  }
+
+  .cta-box {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .price-display {
+    background: white;
+    border: 3px solid var(--sunny-yellow);
+    border-radius: 20px;
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    box-shadow: 0 6px 24px rgba(244,168,54,0.2);
+  }
+
+  .price-amount {
+    font-family: 'Baloo 2', cursive;
+    font-size: 52px;
+    font-weight: 800;
+    color: var(--warm-orange);
+    line-height: 1;
+  }
+
+  .price-details {
+    text-align: left;
+    color: #666;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  .cta-btn-large {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--sunny-yellow) 0%, var(--warm-orange) 100%);
+    color: white;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: clamp(22px, 3.5vw, 30px);
+    padding: 20px 64px;
+    border-radius: 60px;
+    text-decoration: none;
+    box-shadow: 0 8px 0 rgba(200,100,20,0.35), 0 20px 50px rgba(255,180,50,0.35);
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+  }
+
+  .cta-btn-large:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 0 rgba(200,100,20,0.35), 0 26px 60px rgba(255,180,50,0.45);
+  }
+
+  .trust-row {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #888;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .trust-badge span:first-child { font-size: 18px; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: #222;
+    padding: 28px 20px;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 600;
+  }
+
+  /* ---- FLOATING PAW ANIMATION ---- */
+  .floating-paws {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+  }
+
+  .fp { position: absolute; opacity: 0; animation: floatPaw linear infinite; font-size: 24px; }
+  @keyframes floatPaw {
+    0% { opacity: 0; transform: translateY(100vh) rotate(0deg); }
+    10% { opacity: 0.06; }
+    90% { opacity: 0.06; }
+    100% { opacity: 0; transform: translateY(-100px) rotate(360deg); }
+  }
+</style>
+</head>
+<body>
+
+
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+
+  <div class="badge-new">Now Available</div>
+
+  <h1 class="hero-title">
+    <span class="sunny">Sunny</span><br>
+    <span class="the">the</span>
+    <span class="vacuum">Vacuum</span>
+    <span class="dog">Dog</span>
+  </h1>
+
+  <p class="hero-subtitle">A heartwarming, funny & educational story for little ones</p>
+
+  <div class="book-showcase">
+    <div style="position:relative; display:inline-block;">
+      <img src="book-cover.png" alt="Sunny the Vacuum Dog book cover"
+        style="
+          width: clamp(230px, 38vw, 310px);
+          border-radius: 16px;
+          box-shadow: 0 8px 0 rgba(0,0,0,0.12), 0 20px 60px rgba(0,0,0,0.22), 0 40px 80px rgba(0,0,0,0.1);
+          transform: rotate(-2deg);
+          transition: transform 0.4s ease, box-shadow 0.4s ease;
+          display: block;
+        "
+        onmouseover="this.style.transform='rotate(0deg) scale(1.03)'; this.style.boxShadow='0 25px 80px rgba(0,0,0,0.25)'"
+        onmouseout="this.style.transform='rotate(-2deg)'; this.style.boxShadow='0 8px 0 rgba(0,0,0,0.12), 0 20px 60px rgba(0,0,0,0.22)'"
+      />
+
+      <!-- Price sticker -->
+      <div class="sticker sticker-price">
+        <span class="amount">$14.99</span>
+        <span>CAD</span>
+      </div>
+
+      <!-- Shipping sticker -->
+      <div class="sticker sticker-ship">
+        <span class="ship-icon">🚚</span>
+        <span>Free Shipping</span>
+        <span>in Canada</span>
+      </div>
+    </div>
+  </div>
+
+  <a href="https://buy.stripe.com/28E8wPf6jdqX2aJgPB7kc02" class="hero-cta" target="_blank" rel="noopener">
+    Get Your Copy Now
+  </a>
+  <p class="shipping-note">$14.99 CAD — Shipping included across Canada</p>
+</section>
+
+<!-- ========== STORY STRIP ========== -->
+<div class="wave-divider" style="background:var(--cream);">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;">
+    <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="#4ECDC4"/>
+  </svg>
+</div>
+
+<section class="story-strip">
+  <h2>What's the story about?</h2>
+  <p>
+    Meet <strong>Sunny</strong> - a golden, playful pup with a talent for vacuuming up every crumb that falls under the table!
+    He and his best friend <strong>Kai</strong> were born on the same day and have grown up side by side.
+    But one afternoon at a birthday party, Sunny gobbles up something he shouldn't - chocolate and grapes!
+    What happens next is a sweet, funny lesson that kids AND parents will love. 🎉
+  </p>
+</section>
+
+<div class="wave-divider" style="background:var(--cream);">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;">
+    <path d="M0,60 C360,0 1080,0 1440,60 L1440,0 L0,0 Z" fill="#4ECDC4"/>
+  </svg>
+</div>
+
+
+
+<!-- ========== LEARNING ========== -->
+<section class="learning-section">
+  <div class="section-label">Why Parents Love It</div>
+  <h2>Learning wrapped in a big puppy hug</h2>
+  <p>This book gently teaches children real and important lessons in the most fun way possible.</p>
+  <div class="lessons-grid">
+    <div class="lesson-card lc-yellow">
+      <h3>Pet Safety</h3>
+      <p>Learn which everyday foods can be dangerous for dogs - in a story kids will remember</p>
+    </div>
+    <div class="lesson-card lc-green">
+      <h3>Friendship</h3>
+      <p>The beautiful bond between Kai and Sunny shows what it means to love and care for a pet</p>
+    </div>
+    <div class="lesson-card lc-pink">
+      <h3>Responsibility</h3>
+      <p>Kai learns to be careful with food - a gentle lesson delivered with humor and heart</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOD FACTS ========== -->
+<section class="food-section">
+  <h2>Sunny's "No-No" List</h2>
+  <p>Hidden in the story: a real lesson about foods that are dangerous for dogs!</p>
+  <div class="food-tags">
+    <span class="food-tag">Chocolate</span>
+    <span class="food-tag">Grapes &amp; Raisins</span>
+    <span class="food-tag">Onions</span>
+    <span class="food-tag">Garlic</span>
+    <span class="food-tag">Candy &amp; Sweets</span>
+    <span class="food-tag">Macadamia Nuts</span>
+  </div>
+</section>
+
+<!-- ========== AUTHOR ========== -->
+<section class="author-section">
+  <h2>Meet the Author</h2>
+  <p class="author-bio">
+    <strong>Dr. Brianna Tobin Buchnik</strong> wrote this story from the heart - inspired by real life with her daughters Ray and Kai,
+    their golden dog Sunny, and their beloved pets Cricket, Maxime, Samson, and little Dita.
+    The illustrations were brought to life by <strong>Reut Tobin Buchnik</strong>, giving the book its warm,
+    hand-crafted watercolor charm that children and parents alike fall in love with.
+  </p>
+</section>
+
+<!-- ========== FINAL CTA ========== -->
+<section class="cta-section">
+  <h2>Ready to meet <span class="highlight">Sunny?</span></h2>
+  <p>A perfect gift for any child who loves animals — and any family with a furry vacuum at home!</p>
+
+  <div class="cta-box">
+    <div class="price-display">
+      <span class="price-amount">$14.99</span>
+      <div class="price-details">
+        Canadian Dollars<br>
+        Free shipping anywhere in Canada<br>
+        25 colourful illustrated pages
+      </div>
+    </div>
+    <a href="https://buy.stripe.com/28E8wPf6jdqX2aJgPB7kc02" class="cta-btn-large" target="_blank" rel="noopener">
+      Order Now — $14.99 CAD
+    </a>
+    <div class="trust-row">
+      <span class="trust-badge"><span>🔒</span><span>Secure Checkout</span></span>
+      <span class="trust-badge"><span>🚚</span><span>Ships Across Canada</span></span>
+      <span class="trust-badge"><span>💳</span><span>Easy Payment</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  © 2026 Brianna Tobin Buchnik. All rights reserved. &nbsp;|&nbsp; Illustrations by Reut Tobin Buchnik
+</footer>
+
+</body>
+</html>
